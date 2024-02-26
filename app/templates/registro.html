@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+    <style>
+        .alerta {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(244, 67, 54, 0.9); /* Rojo con transparencia */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 999;
+            opacity: 1; /* Inicialmente completamente visible */
+            transition: opacity 0.2s ease-in-out; /* Animación de desvanecimiento */
+        }
+
+        .alerta.hidden {
+            opacity: 0; /* Desaparece gradualmente */
+            pointer-events: none; /* No se puede hacer clic en la alerta oculta */
+            display: none; /* Ocultar la alerta del flujo del documento */
+        }
+    </style>
+</head>
+<body>
+
+<video autoplay muted loop class="bg-video">
+    <source src="{{ url_for('static', filename='videos/fondonvidia.mp4') }}" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+</video>
+
+<div class="form-container">
+    <h1>Registro</h1>
+    <div class="alerta hidden" id="alerta"></div>
+    <form id="registro-form" method="post">
+        <!-- Campos del formulario -->
+        <input type="email" name="email" placeholder="Correo electrónico" required><br>
+        <input type="text" name="mobile" placeholder="Teléfono móvil" required><br>
+        <input type="date" name="dob" placeholder="Fecha de nacimiento" required><br>
+        <input type="text" name="postcode" placeholder="Código postal" required><br>
+        <input type="text" name="username" placeholder="Nombre de usuario" required><br>
+        <input type="password" name="password" placeholder="Contraseña" required><br>
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+<script>
+    // Mostrar la alerta nuevamente cuando se envíe el formulario
+    document.getElementById('registro-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar la acción predeterminada de enviar el formulario
+        var formData = new FormData(this); // Obtener los datos del formulario
+        fetch('/registro', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = "{{ url_for('main.landing_page') }}"; // Redirigir al landing page si el registro fue exitoso
+            } else {
+                var alerta = document.getElementById('alerta');
+                alerta.textContent = data.message; // Establecer el mensaje de la alerta
+                alerta.classList.remove('hidden'); // Mostrar la alerta
+                setTimeout(function() {
+                    alerta.classList.add('hidden'); // Ocultar la alerta después de 2 segundos
+                }, 2000);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+</body>
+</html>

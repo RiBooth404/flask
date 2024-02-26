@@ -7,14 +7,14 @@
     <style>
         .alert-container {
             position: fixed;
-            top: 50px; /* Ajusta según sea necesario */
+            top: 50px;
             left: 50%;
             transform: translateX(-50%);
             background-color: #f44336;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
-            z-index: 999; /* Asegura que la alerta esté en la parte superior */
+            z-index: 999;
             display: {% if mensaje_login %} block {% else %} none {% endif %};
         }
     </style>
