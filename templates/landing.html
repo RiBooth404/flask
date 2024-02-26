@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing Page - J-force now</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .alert-container {
+            position: fixed;
+            top: 50px; /* Ajusta según sea necesario */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 999; /* Asegura que la alerta esté en la parte superior */
+            display: {% if mensaje_login %} block {% else %} none {% endif %};
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div>
+        <img src="{{ url_for('static', filename='img/logoinventado.png') }}" alt="Logo" class="logo">
+    </div>
+    <div>
+        {% if 'username' in session %}
+            Bienvenido, {{ session['username'] }}<br>
+            Última conexión: {{ session['last_login'] }}
+            <a href="/logout">Cerrar sesión</a>
+        {% else %}
+            <form method="post" action="/login">
+                <input type="text" name="username" placeholder="Nombre de usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+<video autoplay muted loop class="bg-video">
+    <source src="{{ url_for('static', filename='videos/videolanding.mp4') }}" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
+</video>
+
+<div class="content">
+    <h1>Bienvenido a J-force now</h1>
+    {% if not 'username' in session %}
+        <a href="/registro" class="register-link">Registrarse</a>
+    {% endif %}
+    {% if alerta_registro %}
+        <div class="alert">{{ alerta_registro }}</div>
+    {% endif %}
+</div>
+
+<div class="alert-container">
+    {% if mensaje_login %}
+        {{ mensaje_login }}
+    {% endif %}
+</div>
+
+</body>
+</html>

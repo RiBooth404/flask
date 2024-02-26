@@ -1,0 +1,23 @@
+/* Contenido del archivo static/css/alert.css */
+.alerta-login {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 9999; /* Asegura que la alerta esté en la parte superior */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Añade una sombra */
+    animation: fadeOut 3s forwards; /* Aplica una animación de desvanecimiento */
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}

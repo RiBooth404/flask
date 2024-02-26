@@ -1,0 +1,92 @@
+/* Contenido del archivo static/css/styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navbar img.logo {
+    height: 50px;
+    margin-right: 10px;
+}
+
+.navbar input[type="text"],
+.navbar input[type="password"] {
+    padding: 8px;
+    margin-left: 5px;
+    background-color: white; /* Cambiar el fondo a blanco */
+    color: #333; /* Cambiar el color del texto a negro */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar button, .navbar a {
+    padding: 8px;
+    margin-left: 5px;
+    background-color: #76B900; /* Cambiar el color del botón a verde de Nvidia */
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar a:hover, .navbar button:hover {
+    background-color: #5F9200; /* Cambiar el color de fondo del botón al pasar el ratón */
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.register-link {
+    display: block;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.register-link:hover {
+    background-color: #218838;
+}
+
+/* Estilos para la alerta de inicio de sesión fallido */
+.alerta-login {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
